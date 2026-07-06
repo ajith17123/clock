@@ -1,0 +1,148 @@
+/* Reset & Base Layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #0c0f1d;
+  display: flex;
+  justify-content: center; /* Center horizontally on the screen */
+  align-items: center;     /* Center vertically on the screen */
+  overflow: hidden;
+  color: #ffffff;
+}
+
+/* Master Centered Dial Canvas Wrapper */
+.center-dial {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Individual Ring Layers */
+.ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  /* Smoothly animates the entire ring's rotation to track the hour hand */
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base style for ring items */
+.ring-item {
+  position: absolute;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.15);
+  text-align: center;
+  width: 35px;
+  transform-origin: center center;
+}
+
+/* Highlight style when active - creates a glowing line straight down the hour position */
+.ring-item.active {
+  color: #00c6ff;
+  font-weight: 700;
+  font-size: 13px;
+  text-shadow: 0 0 12px rgba(0, 198, 255, 0.8);
+  transition: color 0.3s ease;
+}
+
+/* Clock Face Core Container */
+.clock-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Keeps it perfectly dead-center */
+  width: 130px;
+  height: 130px;
+  background: #151929;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.6), 0 8px 25px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.center-pivot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+/* Mechanical Hands Styling */
+.hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 4px;
+}
+
+.hour-hand {
+  width: 4px;
+  height: 35px;
+  background-color: #ffffff;
+  margin-left: -2px;
+  z-index: 7;
+}
+
+.minute-hand {
+  width: 3px;
+  height: 48px;
+  background-color: #a0a5c0;
+  margin-left: -1.5px;
+  z-index: 8;
+}
+
+.second-hand {
+  width: 1.5px;
+  height: 54px;
+  background-color: #ff4757;
+  margin-left: -0.75px;
+  z-index: 9;
+  transition: transform 0.1s cubic-bezier(0.8, 0, 0.2, 1); 
+}
+
+/* Central Digital Info Text Blocks */
+.central-text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: 18px;
+}
+
+.greeting {
+  font-size: 9px;
+  font-weight: 700;
+  color: #6a6f8a;
+  letter-spacing: 1.5px;
+}
+
+.sub-day {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 1px;
+}
