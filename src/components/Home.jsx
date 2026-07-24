@@ -106,7 +106,7 @@ const Home = () => {
           {/* Central Digital Label */}
           <div className="central-text">
           
-            <span className="sub-day">{daysOfWeek[currentDay]}</span>
+            <span className="sub-day">{time.getFullYear()}</span>
           </div>
         </div>
 

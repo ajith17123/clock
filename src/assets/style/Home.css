@@ -7,9 +7,10 @@
 }
 
 .dashboard-container {
+  position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #0c0f1d;
+  background-color: #0b0d19;
   display: flex;
   justify-content: center; /* Center horizontally on the screen */
   align-items: center;     /* Center vertically on the screen */
@@ -17,9 +18,25 @@
   color: #ffffff;
 }
 
+.dashboard-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.08; /* Lower opacity to keep background subtle and clock perfectly visible */
+  z-index: 1;
+}
+
 /* Master Centered Dial Canvas Wrapper */
 .center-dial {
   position: relative;
+  z-index: 2; /* Positioned above the low-opacity background */
   width: 450px;
   height: 450px;
   display: flex;
@@ -46,20 +63,33 @@
 .ring-item {
   position: absolute;
   font-size: 11px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.15);
+  font-weight: 700;
   text-align: center;
   width: 35px;
   transform-origin: center center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 
-/* Highlight style when active - creates a glowing line straight down the hour position */
+/* Distinct base colors for each round (inactive circles) */
+.date-ring .ring-item {
+  color: rgba(255, 215, 0, 0.45); /* Gold / Amber round */
+}
+
+.month-ring .ring-item {
+  color: rgba(0, 198, 255, 0.45); /* Sky Blue / Ice Blue round */
+}
+
+.day-ring .ring-item {
+  color: rgba(224, 130, 242, 0.45); /* Lavender / Violet round */
+}
+
+/* Highlight style when active - creates a glowing line straight down the hour position (today's info indication) */
 .ring-item.active {
-  color: #00c6ff;
   font-weight: 700;
   font-size: 13px;
-  text-shadow: 0 0 12px rgba(0, 198, 255, 0.8);
-  transition: color 0.3s ease;
+  color: #00ffb3; /* Unified glowing Emerald Green for today's info */
+  text-shadow: 0 0 14px rgba(0, 255, 179, 0.95), 0 0 4px rgba(0, 0, 0, 0.6);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 /* Clock Face Core Container */
@@ -142,7 +172,9 @@
 
 .sub-day {
   font-size: 11px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+  color: #00ffb3;
+  text-shadow: 0 0 8px rgba(0, 255, 179, 0.6);
+  letter-spacing: 1px;
   margin-top: 1px;
 }
