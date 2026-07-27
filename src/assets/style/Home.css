@@ -178,3 +178,33 @@
   letter-spacing: 1px;
   margin-top: 1px;
 }
+
+/* Rings Wrapper - spans the full container and handles the auto-rotation */
+.rings-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* Allow interaction with elements behind if necessary */
+  animation: spin-rings 25s linear infinite;
+  transform-origin: center center;
+}
+
+/* Pause the ring rotation when hovering over the clock dial */
+.center-dial:hover .rings-wrapper {
+  animation-play-state: paused;
+}
+
+/* Rotation keyframes for the wrapper */
+@keyframes spin-rings {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -34,64 +34,67 @@ const Home = () => {
   const activeMonthAngle = (currentMonth * 360) / 12;
   const activeDayAngle = (currentDay * 360) / 7;
 
-  // 3. Math to dynamically shift the entire ring so the active items line up with the hour hand
-  const dateRingOffset = hourAngle - activeDateAngle;
-  const monthRingOffset = hourAngle - activeMonthAngle;
-  const dayRingOffset = hourAngle - activeDayAngle;
+  // 3. Math to dynamically shift the entire ring so the active items line up vertically at the top (0 degrees)
+  const dateRingOffset = -activeDateAngle;
+  const monthRingOffset = -activeMonthAngle;
+  const dayRingOffset = -activeDayAngle;
 
   return (
     <div className="dashboard-container">
       <div className="center-dial">
         
-        {/* Outer Ring: Days of the Month (1-31) */}
-        <div className="ring date-ring" style={{ transform: `rotate(${dateRingOffset}deg)` }}>
-          {daysInMonth.map((day, index) => {
-            const angle = (index * 360) / 31;
-            const isActive = day === currentDate;
-            return (
-              <span
-                key={day}
-                className={`ring-item ${isActive ? 'active' : ''}`}
-                style={{ transform: `rotate(${angle}deg) translateY(-170px)` }}
-              >
-                {day}
-              </span>
-            );
-          })}
-        </div>
+        {/* Wrapper for the auto-rotating calendar rings */}
+        <div className="rings-wrapper">
+          {/* Outer Ring: Days of the Month (1-31) */}
+          <div className="ring date-ring" style={{ transform: `rotate(${dateRingOffset}deg)` }}>
+            {daysInMonth.map((day, index) => {
+              const angle = (index * 360) / 31;
+              const isActive = day === currentDate;
+              return (
+                <span
+                  key={day}
+                  className={`ring-item ${isActive ? 'active' : ''}`}
+                  style={{ transform: `rotate(${angle}deg) translateY(-170px)` }}
+                >
+                  {day}
+                </span>
+              );
+            })}
+          </div>
 
-        {/* Middle Ring: Months (JAN-DEC) */}
-        <div className="ring month-ring" style={{ transform: `rotate(${monthRingOffset}deg)` }}>
-          {months.map((month, index) => {
-            const angle = (index * 360) / 12;
-            const isActive = index === currentMonth;
-            return (
-              <span
-                key={month}
-                className={`ring-item ${isActive ? 'active' : ''}`}
-                style={{ transform: `rotate(${angle}deg) translateY(-130px)` }}
-              >
-                {month}
-              </span>
-            );
-          })}
-        </div>
+          {/* Middle Ring: Months (JAN-DEC) */}
+          <div className="ring month-ring" style={{ transform: `rotate(${monthRingOffset}deg)` }}>
+            {months.map((month, index) => {
+              const angle = (index * 360) / 12;
+              const isActive = index === currentMonth;
+              return (
+                <span
+                  key={month}
+                  className={`ring-item ${isActive ? 'active' : ''}`}
+                  style={{ transform: `rotate(${angle}deg) translateY(-130px)` }}
+                >
+                  {month}
+                </span>
+              );
+            })}
+          </div>
 
-        {/* Inner Ring: Days of the Week (SUN-SAT) */}
-        <div className="ring day-ring" style={{ transform: `rotate(${dayRingOffset}deg)` }}>
-          {daysOfWeek.map((day, index) => {
-            const angle = (index * 360) / 7;
-            const isActive = index === currentDay;
-            return (
-              <span
-                key={day}
-                className={`ring-item ${isActive ? 'active' : ''}`}
-                style={{ transform: `rotate(${angle}deg) translateY(-90px)` }}
-              >
-                {day}
-              </span>
-            );
-          })}
+          {/* Inner Ring: Days of the Week (SUN-SAT) */}
+          <div className="ring day-ring" style={{ transform: `rotate(${dayRingOffset}deg)` }}>
+            {daysOfWeek.map((day, index) => {
+              const angle = (index * 360) / 7;
+              const isActive = index === currentDay;
+              return (
+                <span
+                  key={day}
+                  className={`ring-item ${isActive ? 'active' : ''}`}
+                  style={{ transform: `rotate(${angle}deg) translateY(-90px)` }}
+                >
+                  {day}
+                </span>
+              );
+            })}
+          </div>
         </div>
 
         {/* Core Analogue Clock Face - Locked Exactly in the Center */}
